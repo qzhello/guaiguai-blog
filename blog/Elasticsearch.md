@@ -1,7 +1,7 @@
 ---
 title: Configuration
 # 禁用目录
-toc: false
+toc: true
 ---
 
 # Elasticsearch 源码构建
