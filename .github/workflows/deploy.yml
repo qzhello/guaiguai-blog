@@ -1,0 +1,50 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mirror the Github organization repos to Gitee.
+        uses: Yikun/gitee-mirror-action@v0.10
+        with:
+            src: github/qzhello
+            dst: gitee/quzhihao
+            # 必选，Gitee公钥对应的私钥，https://gitee.com/profile/sshkeys
+            dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+            # 必选，Gitee对应的用于创建仓库的token，https://gitee.com/profile/personal_access_tokens
+            dst_token: ${{ secrets.GITEE_TOKEN }}
+            # 如果是组织，指定组织即可，默认为用户user
+            # account_type: org
+            # 还有黑、白名单，静态名单机制，可以用于更新某些指定库
+            # static_list: "repo_name"
+            # black_list: "repo_name,repo_name2"
+            # white_list: "repo_name,repo_name2"
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Add SSH Key
+        run: |
+          echo "${{ secrets.SSH_PEM_KEY }}" > deploy_key.pem
+          chmod 600 deploy_key.pem
+
+      - name: Run script over SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_ADDRESS }}
+          username: root
+          key_path: deploy_key.pem
+          script_stop: true
+          script: |
+            sudo bash -c '
+            cd /usr/local/guaiguai/content
+            git pull https://gitee.com/quzhihao/guaiguai-blog.git
+            hugo'
+
+      - name: Cleanup
+        run: rm -f deploy_key.pem
