@@ -1,3 +1,9 @@
+---
+title: Configuration
+# 禁用目录
+toc: false
+---
+
 # Elasticsearch 源码构建
 
 ```java{lineos=table, linenostart=42}
