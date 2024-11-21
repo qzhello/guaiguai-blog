@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Elasticsearch
 # 禁用目录
 toc: true
 comments: true
@@ -9,7 +9,7 @@ comments: true
 
 这怎么一大坨
 
-```java
+```[java]
 void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
 ```
 
@@ -17,7 +17,7 @@ void handleRequest(RestRequest request, RestChannel channel, NodeClient client) 
 void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
 ```
 
-```mermaid
+```[mermaid]
 graph TD;
     A-->B;
     A-->C;
