@@ -41,6 +41,7 @@ jobs:
             sudo bash -c '
             cd /usr/local/guaiguai/content
             git pull https://gitee.com/quzhihao/guaiguai-blog.git
+            cd /usr/local/guaiguai/
             hugo'
 
       - name: Cleanup
