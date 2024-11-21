@@ -6,11 +6,11 @@ toc: true
 
 # Elasticsearch 源码构建
 
-```java{lineos=table, linenostart=42}
+```java
 void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
 ```
 
-```{linenos=table,hl_lines=[42,43],linenostart=42,filename="RestHandle.java"}
+```
 void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
 ```
 
