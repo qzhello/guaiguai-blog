@@ -1,1 +1,0 @@
-![landscape](statics/kun.jpg "小黄鸡")
