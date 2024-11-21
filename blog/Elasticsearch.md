@@ -2,9 +2,12 @@
 title: Configuration
 # 禁用目录
 toc: true
+comments: true
 ---
 
 # Elasticsearch 源码构建
+
+这怎么一大坨
 
 ```java
 void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
