@@ -6,8 +6,7 @@ toc:
   auto: true
 comment:
   enable: true
-share:
-  enable: true
+share: true
 comments: true
 weight: 1
 _date: {{ .Date }}_
