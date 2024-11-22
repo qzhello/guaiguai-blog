@@ -1,8 +1,9 @@
 ---
-title: Elasticsearch入门必看
+title: Elasticsearch命令
 # 禁用目录
 toc: true
 comments: true
 weight: 1
 ---
-# Elasticsearch 入门
+这里是ES的常用命令汇总
+

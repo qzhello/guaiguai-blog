@@ -1,42 +1,8 @@
 ---
-title: Elasticsearch
+title: Elasticsearch入门指南
 # 禁用目录
 toc: true
 comments: true
 weight: 1
 ---
-es是个什么呢？
-
-
-# Elasticsearch 源码构建
-
-## 这怎么一大坨
-
-
-### 这还有
-
-
-```java
-void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
-```
-
-```
-void handleRequest(RestRequest request, RestChannel channel, NodeClient client) throws Exception;
-```
-
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
-{{< callout emoji="🌐" >}}
-Hugo 可用于创建各种网站，包括博客、作品集、文档网站等
-{{< /callout >}}
-
-{{< callout type="info" >}}
-请访问 GitHub 查看最新版本
-{{< /callout >}}
-
+这里为ES的入门必看指南
