@@ -17,6 +17,7 @@ toc: false
 # 热门文章推荐
 {{< cards >}}
 {{< card link="https://tech.meituan.com/2024/10/31/cikm-2024-meituan.html" title="美团技术团队" image="statics/meituan2024.png" subtitle="CIKM 2024 | 美团技术团队精选论文解读" >}}
+{{< card link="https://www.infoq.cn/" title="InfoQ" image="statics/infoq.png" subtitle="促进软件开发及相关领域知识与创新的传播-极客邦" >}}
 {{< /cards >}}
 
 # 最近更新
