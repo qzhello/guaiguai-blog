@@ -10,7 +10,6 @@ share:
   enable: true
 comments: true
 weight: 1
-subtitle: ""
 _date: {{ .Date }}_
 
 ---
