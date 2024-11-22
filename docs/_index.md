@@ -1,12 +1,10 @@
 ---
-title: 开始
+title: 文档
 weight: 1
 ---
 
 
 
-{{% details title="Details" %}}
-这是细节的内容
-
-**支持** Markdown
-{{% /details %}}
+{{< callout emoji="🌐" >}}
+常用命令、建站技巧等汇总
+{{< /callout >}}

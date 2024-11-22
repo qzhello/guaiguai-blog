@@ -1,4 +1,4 @@
 ---
-title: Guide
+title: Linux
 weight: 2
 ---

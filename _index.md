@@ -22,6 +22,7 @@ toc: false
 
 # 最近更新
 {{< cards >}}
-{{< card link="/blog" title="Local Image" image="statics/home_1.png" subtitle="日常开发经验总结" method="Resize" options="600x q80 webp" >}}
+{{< card link="/blog" title="博客" image="statics/home_1.png" subtitle="日常开发经验总结" method="Resize" options="600x q80 webp" >}}
+{{< card link="/blog" title="文档" image="statics/home_2.png" subtitle="疑难杂症总结文档" method="Resize" options="600x q80 webp" >}}
 {{< /cards >}}
 

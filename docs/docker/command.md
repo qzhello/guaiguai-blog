@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: 常用命令
 # 禁用目录
 toc: false
 ---
