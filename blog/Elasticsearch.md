@@ -1,11 +1,7 @@
 ---
 title: Elasticsearch
 # 禁用目录
-toc:
-  enable: true
-  auto: true
-comment:
-  enable: true
+toc: true
 share: true
 comments: true
 weight: 1
