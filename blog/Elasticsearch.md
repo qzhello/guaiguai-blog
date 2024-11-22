@@ -1,9 +1,18 @@
 ---
 title: Elasticsearch
 # 禁用目录
-toc: true
+toc:
+  enable: true
+  auto: true
+comment:
+  enable: true
+share:
+  enable: true
 comments: true
 weight: 1
+subtitle: ""
+_date: {{ .Date }}_
+
 ---
 es是个什么呢？
 
