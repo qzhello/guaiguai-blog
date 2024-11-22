@@ -2,11 +2,8 @@
 title: Elasticsearch
 # 禁用目录
 toc: true
-share: true
 comments: true
 weight: 1
-_date: {{ .Date }}_
-
 ---
 es是个什么呢？
 
@@ -42,3 +39,4 @@ Hugo 可用于创建各种网站，包括博客、作品集、文档网站等
 {{< callout type="info" >}}
 请访问 GitHub 查看最新版本
 {{< /callout >}}
+
