@@ -1,6 +1,7 @@
 ---
 title: 欢迎来到Kizuhiko的个人博客
 weight: 1
+toc: false
 ---
 
 # 自我介绍
@@ -15,9 +16,11 @@ weight: 1
 
 # 热门文章推荐
 {{< cards >}}
-{{< card link="/docs" title="文档" image="statics/kunmao.png" subtitle="方法论归纳" >}}
-{{< card link="/blog" title="Local Image" image="statics/kun.jpg" subtitle="日常开发经验总结" method="Resize" options="600x q80 webp" >}}
+{{< card link="https://tech.meituan.com/2024/10/31/cikm-2024-meituan.html" title="美团技术团队" image="statics/meituan2024.png" subtitle="CIKM 2024 | 美团技术团队精选论文解读" >}}
 {{< /cards >}}
 
 # 最近更新
+{{< cards >}}
+{{< card link="/blog" title="Local Image" image="statics/home_1.png" subtitle="日常开发经验总结" method="Resize" options="600x q80 webp" >}}
+{{< /cards >}}
 
