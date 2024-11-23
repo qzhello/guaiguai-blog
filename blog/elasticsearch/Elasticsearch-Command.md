@@ -12,23 +12,22 @@ weight: 1
 ## 索引
 
 ### 创建索引
-
-```http
+```shell
 PUT /<index_name>
 ```
 
 ### 删除索引
-```
+```shell
 DELETE /<index_name>
 ```
 
 ### 查看所有索引
-```
+```shell
 GET /_cat/indices?v
 ```
 
 ### 查看索引文档计数
-```
+```shell
 GET /<index_name>/_count
 ```
 
@@ -78,14 +77,14 @@ PUT /<index_name>/_settings
 GET /_cluster/health
 ```
 ### 查看集群状态
-```
+```shell
 GET /_cluster/stats
 ```
 ### 查看分片信息
-```
+```shell
 GET /_cat/shards?v
 ```
 ### 查看分配信息
-```
+```shell
 GET /_cat/allocation?v
 ```
