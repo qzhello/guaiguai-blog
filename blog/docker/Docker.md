@@ -1,7 +1,7 @@
 ---
 title: Docker入门指南
 # 禁用目录
-toc: false
+toc: true
 weight: 1
 ---
 
@@ -27,6 +27,3 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo docker pull nginx
 sudo docker run --name docker-nginx-demo -d -p 8080:80 nginx
 ```
-# Docker基本命令
-
-# 常见问题
