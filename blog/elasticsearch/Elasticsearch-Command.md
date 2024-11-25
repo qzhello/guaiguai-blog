@@ -9,7 +9,7 @@ weight: 1
 
 本文档汇总了 Elasticsearch 的常用命令，按索引、索引映射、索引设置和集群管理进行分类。
 
-## 索引
+## 索引（Index）
 
 ### 创建索引
 ```shell
@@ -32,6 +32,7 @@ GET /<index_name>/_count
 ```
 
 ## 索引映射（Mapping）
+https://www.elastic.co/guide/en/elasticsearch/reference/8.13/mapping.html
 ### 查看索引的映射
 ```shell
 GET /<index_name>/_mapping

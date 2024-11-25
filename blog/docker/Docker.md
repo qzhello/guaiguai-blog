@@ -27,3 +27,34 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo docker pull nginx
 sudo docker run --name docker-nginx-demo -d -p 8080:80 nginx
 ```
+
+# 镜像加速
+## 阿里云加速地址获取
+访问这个链接进行配置：
+`
+https://cr.console.aliyun.com/cn-chengdu/instances/mirrors
+`
+## 更换镜像源
+```shell
+# 编辑Docker配置文件: 打开或创建 
+/etc/docker/daemon.json
+
+# 重启Docker服务: 为使配置生效，请执行以下命令：
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+配置如下：
+```shell
+{
+    "registry-mirrors": [
+            "https://docker.211678.top",
+            "https://docker.1panel.live",
+            "https://hub.rat.dev",
+            "https://docker.m.daocloud.io",
+            "https://do.nark.eu.org",
+            "https://dockerpull.com",
+            "https://dockerproxy.cn",
+            "https://docker.awsl9527.cn"
+      ]
+}
+```
