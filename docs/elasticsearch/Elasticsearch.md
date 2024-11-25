@@ -5,7 +5,6 @@ toc: true
 comments: true
 weight: 1
 ---
-# Elasticsearch 入门指南
 Elasticsearch 是一个分布式搜索和分析引擎，常用于处理海量数据的实时搜索和分析。它建立在 Apache Lucene 基础之上，并提供了一个简单的 RESTful API 进行交互。
 https://www.elastic.co/guide/en/elasticsearch/reference/8.13/mapping.html
 

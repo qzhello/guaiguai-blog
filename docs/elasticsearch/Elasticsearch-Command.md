@@ -5,8 +5,6 @@ toc: true
 comments: true
 weight: 1
 ---
-# Elasticsearch 常用命令汇总
-
 本文档汇总了 Elasticsearch 的常用命令，按索引、索引映射、索引设置和集群管理进行分类。
 
 ## 索引（Index）
