@@ -5,7 +5,7 @@ comments: true
 weight: 3
 ---
 
-# 部署
+# 部署ES
 ## 6.8.0
 一般分两步，先把配置文件copy出来，然后删掉重新启动带映射的。
 ```shell
@@ -89,4 +89,25 @@ docker run -d --name elasticsearch522 --privileged=true\
 # 增加用户与角色
 ```shell
 ./elasticsearch-users useradd quzhihao -p quzhihao -r kibana_admin,logstash_system,beats_system,apm_system,kibana_system,beats_admin,ingest_admin,logstash_admin,rollup_admin,superuser,machine_learning_admin,watcher_admin
+```
+
+# 部署Kibana
+```shell
+# v8
+docker run -d -p 15601:5601  \
+  --name kibana862  -e TZ='CST-8' \
+  --volume "/Users/quzhihao/docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml" \ 
+  docker.elastic.co/kibana/kibana:8.6.2
+ 
+# v7
+docker run -d -p 15601:5601  \
+  --name kibana770  \ 
+  --volume "/Users/quzhihao/docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml" \
+  docker.elastic.co/kibana/kibana:7.7.0
+ 
+# v6
+docker run -d -p 15601:5601  \
+  --name kibana680  \
+  --volume "/Users/quzhihao/docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml" \
+  docker.elastic.co/kibana/kibana:6.8.0
 ```

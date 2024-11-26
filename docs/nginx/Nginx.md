@@ -4,6 +4,16 @@ title: Nginx入门指南
 toc: true
 weight: 1
 ---
+# 部署
+## 本机部署
+```shell
+yum -y install gcc gcc-c++ autoconf automake make
+yum install zlib zlib-devel openssl openssl-devel pcre pcre-devel wget httpd-tools vim -y
+./configure --prefix=/usr/local/nginx
+make  
+sudo make install
+/usr/local/nginx/sbin/nginx
+```
 
 # 常用配置
 ### SSL配置
