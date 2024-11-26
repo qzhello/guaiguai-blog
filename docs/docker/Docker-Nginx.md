@@ -1,7 +1,5 @@
 ---
-title: Nginx Docker
-toc: true
-comments: true
+title: Nginx
 weight: 3
 ---
 

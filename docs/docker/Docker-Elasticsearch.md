@@ -1,5 +1,5 @@
 ---
-title: Nginx Elasticsearch
+title: Elasticsearch
 toc: true
 comments: true
 weight: 3

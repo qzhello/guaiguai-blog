@@ -1,6 +1,5 @@
 ---
-title: Nginx Mysql
-toc: true
+title: Mysql
 weight: 3
 ---
 
