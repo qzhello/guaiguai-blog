@@ -98,7 +98,7 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
             throw new IllegalStateException("getOutputStream() has already been called on this response.");
         }
         if (printWriter == null) {
-            printWriter = new PrintWriter(new OutputStreamWriter(gzipOutputStream, getCharacterEncoding()));
+            printWriter = new PrintWriter(new OutputStreamWriter(gzipOutputStream, StandardCharsets.UTF_8));
         }
         return printWriter;
     }
