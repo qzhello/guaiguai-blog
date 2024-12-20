@@ -6,14 +6,14 @@ weight: 1
 ---
 
 # 安装
-## 方式1:
+## 方式1: yum
 ```shell
 yum install java-1.8.0-openjdk.x86_64
 
 ls /usr/lib/jvm/
 ```
 
-## 方式2:
+## 方式2: 压缩包
 下载：
 ```shell
 https://repo.huaweicloud.com:8443/artifactory/java-local/jdk/8u151-b12/jdk-8u151-linux-x64.tar.gz
