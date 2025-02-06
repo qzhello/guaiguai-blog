@@ -87,3 +87,8 @@ GET /_cat/shards?v
 ```shell
 GET /_cat/allocation?v
 ```
+
+### 排序最大占用
+```shell
+_cat/indices/*?v&s=pri.store.size:desc
+```
