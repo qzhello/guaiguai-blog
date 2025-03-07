@@ -23,3 +23,7 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
+# 提交总是失败
+可能是提交了图片，容易中断传输
+`git config --global http.postBuffer 524288000`
+
