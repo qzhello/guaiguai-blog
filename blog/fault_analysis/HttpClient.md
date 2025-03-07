@@ -6,7 +6,7 @@ comments: true
 weight: 2
 ---
 
-# 参数设置的坑
+# RestTemplate参数设置的坑
 ## 现象
 有一个服务的定时任务拉取阻塞住了
 ![img.png](img.png)
