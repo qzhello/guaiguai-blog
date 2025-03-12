@@ -17,7 +17,9 @@ weight: 2
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 
-没有设置`setConnectionRequestTimeout`导致。源码如下：
+没有设置`setConnectionRequestTimeout`导致。
+
+## 源码
 ```java
 @Bean
     public RestTemplate restTemplate() {
