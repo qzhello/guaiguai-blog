@@ -200,6 +200,8 @@ public RestTemplate restTemplate() {
     SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
     requestFactory.setConnectTimeout(3000);
     requestFactory.setReadTimeout(30_000);
+    // 注意要设置setRequestConnectionTimeout
+    // ...
     return new RestTemplate(requestFactory);
 }
 
@@ -209,6 +211,8 @@ public RestTemplate restTemplate() {
     HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
     requestFactory.setConnectTimeout(3000);
     requestFactory.setReadTimeout(30_000);
+    // 注意要设置setRequestConnectionTimeout
+    // ... 
     return new RestTemplate(requestFactory);
 }
 ```

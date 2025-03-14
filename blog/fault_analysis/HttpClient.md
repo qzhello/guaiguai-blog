@@ -27,7 +27,6 @@ weight: 2
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
         requestFactory.setConnectTimeout(3000); //3s
         requestFactory.setReadTimeout(20_000); //20s
-        requestFactory.setConnectionRequestTimeout();
         return new RestTemplate(requestFactory);
     }
 ```
