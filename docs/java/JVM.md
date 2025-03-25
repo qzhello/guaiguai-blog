@@ -5,7 +5,10 @@ toc: true
 comments: true
 weight: 2
 ---
+# GC类型与参数
 
-JVM的原理。
+# JVM的原理
 
 # 内存对齐
+
+# 
