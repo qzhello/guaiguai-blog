@@ -53,7 +53,7 @@ query 关注的景此文档与查询子句的匹配相关度如何？
 Flter 关注的是此文档与查询子句是否匹配，是否满足查询条件？〔不涉及算分］
 https://www.elastic.co/guide/en/elasticsearch/reference/7.15/query-filter-context.html
 
-## 6.、搜索排序场景在写入时对索引设置 Index Sorting，数
+## 6.、搜索排序场景在写入时对索引设置 Index Sorting数
 默认情况下，Lucene 不会做任何排序操作，Search 请求必须检索与查询相匹配的所有文档，
 然后返回按指定字段排序的 TopN 文档。
 而通过 index.sort.* 设置可以对Segment内的特定字段进行排序，字段类型支持 boolean、
@@ -91,6 +91,7 @@ GET /index_name/_search
 ES的检索性能高度依赖底层的 Filesystem Cache，如果给 Filesystem Cache预留足够的内存，那么搜索时候将基本都是走内存，检索性能会非常高。建议机器的总内存容量至少可以容纳索引数据量的一半，并顾热Filesystem Cache，这样基本可以做到亿级文档毫秒级响应。详情可参考官方文档。
 ![img_2.png](img_2.png)
 https://www.elastic.co/guide/en/elasticsearch/reference/master/preload-data-to-file-system-cache.html
+
 1、静态配置elasticsearch.yml  
 ```shell
 index.store.preload: ["nvd", "dvd"]
