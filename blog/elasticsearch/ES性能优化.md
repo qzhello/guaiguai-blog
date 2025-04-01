@@ -49,15 +49,17 @@ POST /my-index/_forcemerge?only_expunge_deletes=true
 ```
 
 ## 5. 利用缓存：不需要算分的查询使用 filter context 代替 query
-query 关注的景此文档与查询子句的匹配相关度如何？
-Flter 关注的是此文档与查询子句是否匹配，是否满足查询条件？〔不涉及算分］
+- query 关注的景此文档与查询子句的匹配相关度如何？  
+- filter 关注的是此文档与查询子句是否匹配，是否满足查询条件？[不涉及算分］  
+参考文档：
 https://www.elastic.co/guide/en/elasticsearch/reference/7.15/query-filter-context.html
 
 ## 6.、搜索排序场景在写入时对索引设置 Index Sorting数
 默认情况下，Lucene 不会做任何排序操作，Search 请求必须检索与查询相匹配的所有文档，
-然后返回按指定字段排序的 TopN 文档。
+然后返回按指定字段排序的 TopN 文档。  
+
 而通过 index.sort.* 设置可以对Segment内的特定字段进行排序，字段类型支持 boolean、
-numeric、date 和 keyword(doc_values)。详情可参考官方文档。
+numeric、date 和 keyword(doc_values)。详情可参考官方文档。  
 https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-index-sorting.html
 
 ```shell
@@ -88,7 +90,11 @@ GET /index_name/_search
 # E5会检查每个提前排好序的segment文件的topn条doc返回，而不再对shard上所有的segment文件进行遍历，大大降低查询耗时。
 ```
 ## 7.为文件系统缓存预留足够的内存空
-ES的检索性能高度依赖底层的 Filesystem Cache，如果给 Filesystem Cache预留足够的内存，那么搜索时候将基本都是走内存，检索性能会非常高。建议机器的总内存容量至少可以容纳索引数据量的一半，并顾热Filesystem Cache，这样基本可以做到亿级文档毫秒级响应。详情可参考官方文档。
+ES的检索性能高度依赖底层的 Filesystem Cache，如果给 Filesystem Cache预留足够的内存，那么搜索时候将基本都是走内存，检索性能会非常高。
+
+建议机器的总内存容量至少可以容纳索引数据量的一半，并顾热Filesystem Cache，这样基本可以做到亿级文档毫秒级响应。
+
+详情可参考官方文档。
 ![img_2.png](img_2.png)
 https://www.elastic.co/guide/en/elasticsearch/reference/master/preload-data-to-file-system-cache.html
 
@@ -109,8 +115,8 @@ PUT /my-index-000001
 ```
 
 ## 8、自定义 routing写入和检索，减少分片查询范围
-自定义 routing 查询，可以做到精准分片检索，减少索引分片的查询范围，提升查询性
-能
+自定义 routing 查询，可以做到精准分片检索，减少索引分片的查询范围，提升查询性能。
+
 容易踩坑的点：  
 如果routing存在严重数据不均等情况，可能会出现严重的热点分片和查询超时问题。
 
