@@ -22,7 +22,6 @@ docker run -d --name elasticsearch680 --privileged=true\
   -p 19200:9200 -p 19300:9300 \
   -e "ES_JAVA_OPTS=-Xms2g -Xmx2g" \
   -v /Users/quzhihao/es/config680:/usr/share/elasticsearch/config \
--v /Users/quzhihao/localtime:/etc/localtime:ro \
  docker.elastic.co/elasticsearch/elasticsearch:6.8.0
 ```
 
