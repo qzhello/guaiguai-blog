@@ -92,3 +92,119 @@ GET /_cat/allocation?v
 ```shell
 _cat/indices/*?v&s=pri.store.size:desc
 ```
+
+
+# 运维
+## reroute
+### reroute 重新分配
+```shell
+POST _cluster/reroute?retry_failed=true
+```
+
+```shell
+POST /_cluster/reroute
+{
+  "commands": [
+    {
+      "cancel": {
+        "index": "index-alldata7-2025-05-03",
+        "shard": 2,
+        "node": "10.177.40.225:30623",
+        "allow_primary": true
+      }
+    }
+  ]
+}
+```
+
+## 索引
+### 优先级
+```shell
+PUT index-alldata7-25-03-26/_settings
+{
+  "index.priority": 1
+}
+```
+
+### 获取索引
+```shell
+GET _cat/indices?health=yellow
+```
+
+### 分配
+```shell
+GET _cat/allocation?v
+```
+
+
+## 集群
+### 分析分配
+```shell
+GET _cluster/allocation/explain
+```
+
+### 分配限速
+```shell
+PUT _cluster/settings
+{
+  "transient": {
+    "cluster.routing.allocation.node_initial_primaries_recoveries": 6,
+    "cluster.routing.allocation.node_concurrent_recoveries": 2,
+    "cluster.routing.allocation.node_concurrent_incoming_recoveries": 2,
+    "cluster.routing.allocation.node_concurrent_outgoing_recoveries": 2,
+    "indices.recovery.max_bytes_per_sec": "10m"
+  }
+}
+
+### 排除节点
+PUT _cluster/settings
+{
+  "transient": {
+     "cluster.routing.allocation.exclude._ip": "10.177.52.46"
+  }
+}
+
+PUT _cluster/settings
+{
+  "transient": {
+     "cluster.routing.allocation.exclude._ip": null
+  }
+}
+```
+
+### 查看恢复任务
+```shell
+GET _recovery?active_only=true
+```
+
+# 单独配置
+```shell
+PUT _cluster/settings
+{
+  "transient": {
+    "indices.recovery.max_bytes_per_sec": "1b"
+  }
+}
+```
+
+## 分片
+### 开启关闭分配
+
+```shell
+# 关闭
+PUT /_cluster/settings
+{
+  "transient": {
+    "cluster.routing.allocation.enable": null
+  }
+}
+
+# 打开
+PUT /_cluster/settings
+{
+  "transient": {
+    "cluster.routing.allocation.enable": "all"
+  }
+}
+
+```
