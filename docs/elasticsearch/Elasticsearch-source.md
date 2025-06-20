@@ -5,11 +5,15 @@ toc: true
 comments: true
 weight: 1
 ---
-Elasticsearch 8.13
+Elasticsearch 8.13.4
 
 # 源码运行
 ```shell
 git clone git@github.com:elastic/elasticsearch.git
+
+分支：da95df1
+
+reset一下到这个分支就是8.13.4
 ```
 
 # 修改路径
