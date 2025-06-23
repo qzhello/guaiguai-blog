@@ -21,7 +21,7 @@ reset一下到这个分支就是8.13.4
  
 https://services.gradle.org/distributions/gradle-8.7-all.zip 
 
-   distributionUrl：改为本地路径，记得把distributionSha256Sum也改掉
+   distributionUrl：改为本地路径，记得把distributionSha256Sum也改掉。最好是所有的gradle都改。
 ```shell
 distributionUrl=file:///Users/quzhihao/Downloads/gradle-8.7-all.zip
 ```
@@ -87,6 +87,7 @@ elasticsearch.yml
 ```shell
 cluster.name: test
 node.name: node-3
+path.logs: /Users/quzhihao/logs
 http.port: 9203
 transport.port: 9303
 discovery.seed_hosts: ["127.0.0.1:9301", "127.0.0.1:9302", "127.0.0.1:9303"]
@@ -159,21 +160,41 @@ docker run -d -p 15601:5601  \
   
 ```
 
+# 调试命令
+jvm.options
+
+增加这句，3个节点就分隔开，比如5007、5008、5009
+```shell
+-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007
+```
+
 # 源码启动
 细节自行修改
-```shell
-#!/bin/bash
+```shell#!/bin/bash
 
 # 定义基础路径
 BASE_PATH="/Users/quzhihao/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
 ES_VERSION="elasticsearch-8.13.4-SNAPSHOT"
 ES_INSTANCES=("$BASE_PATH/${ES_VERSION}-1" "$BASE_PATH/${ES_VERSION}-2" "$BASE_PATH/${ES_VERSION}-3")
+ES_INSTANCES_DEBUG_PORT=("5007" "5008" "5009") # 定义调试端口
 
 # 定义配置文件路径
 CONFIG_FILES=("/Users/quzhihao/Downloads/es1.yml" "/Users/quzhihao/Downloads/es2.yml" "/Users/quzhihao/Downloads/es3.yml")
 
 # JVM 堆内存设置 (4GB)
 HEAP_SIZE="4g"
+
+# 清理 `elasticsearch.keystore.tmp` 文件
+echo "清理 elasticsearch.keystore.tmp 文件..."
+for ES_INSTANCE in "${ES_INSTANCES[@]}"; do
+  KEYSTORE_TMP_FILE="${ES_INSTANCE}/config/elasticsearch.keystore.tmp"
+  if [ -f "$KEYSTORE_TMP_FILE" ]; then
+    rm -f "$KEYSTORE_TMP_FILE"
+    echo "已删除文件: $KEYSTORE_TMP_FILE"
+  else
+    echo "未找到文件: $KEYSTORE_TMP_FILE，跳过清理。"
+  fi
+done
 
 # 杀掉所有运行中的 Elasticsearch 进程
 echo "清理所有运行中的 Elasticsearch 进程..."
@@ -224,16 +245,19 @@ for i in "${!ES_INSTANCES[@]}"; do
   echo "配置文件已复制到: ${ES_INSTANCES[$i]}/config/elasticsearch.yml"
 done
 
-# 设置堆内存大小（追加到文件末尾）
-echo "设置堆内存大小为 $HEAP_SIZE..."
-for ES_INSTANCE in "${ES_INSTANCES[@]}"; do
-  JVM_OPTIONS_FILE="${ES_INSTANCE}/config/jvm.options"
+# 设置堆内存大小和调试选项
+echo "设置堆内存大小和调试选项..."
+for i in "${!ES_INSTANCES[@]}"; do
+  JVM_OPTIONS_FILE="${ES_INSTANCES[$i]}/config/jvm.options"
+  DEBUG_PORT="${ES_INSTANCES_DEBUG_PORT[$i]}" # 获取对应的调试端口
+
   if [ -f "$JVM_OPTIONS_FILE" ]; then
     # 在文件末尾追加堆内存设置
     echo "" >> "$JVM_OPTIONS_FILE"  # 添加一个空行，确保格式清晰
     echo "-Xms${HEAP_SIZE}" >> "$JVM_OPTIONS_FILE"
     echo "-Xmx${HEAP_SIZE}" >> "$JVM_OPTIONS_FILE"
-    echo "堆内存设置已追加到文件末尾: $JVM_OPTIONS_FILE"
+    echo "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${DEBUG_PORT}" >> "$JVM_OPTIONS_FILE"
+    echo "堆内存设置和调试选项已追加到文件末尾: $JVM_OPTIONS_FILE"
   else
     echo "未找到 jvm.options 文件: $JVM_OPTIONS_FILE"
   fi
@@ -241,12 +265,14 @@ done
 
 # 启动 Elasticsearch 实例
 echo "启动 Elasticsearch 实例..."
-for ES_INSTANCE in "${ES_INSTANCES[@]}"; do
-  "${ES_INSTANCE}/bin/elasticsearch" &
-  echo "启动 Elasticsearch: $ES_INSTANCE"
+for i in "${!ES_INSTANCES[@]}"; do
+  DEBUG_PORT="${ES_INSTANCES_DEBUG_PORT[$i]}"
+  "${ES_INSTANCES[$i]}/bin/elasticsearch" &
+  echo "启动 Elasticsearch: ${ES_INSTANCES[$i]} (调试端口: $DEBUG_PORT)"
 done
 
 echo "所有 Elasticsearch 实例已启动！"
+
 ```
 
 关闭脚本
@@ -269,5 +295,83 @@ else
 fi
 
 echo "Elasticsearch 已关闭完成！"
+
+```
+
+
+重启/停止
+
+chmod +x manage_node.sh
+
+例如：
+./manage_node.sh 1 stop
+./manage_node.sh 2 restart
+./manage_node.sh 3 stop
+
+```shell
+#!/bin/bash
+
+# 定义基础路径
+BASE_PATH="/Users/quzhihao/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
+ES_VERSION="elasticsearch-8.13.4-SNAPSHOT"
+ES_INSTANCES=("$BASE_PATH/${ES_VERSION}-1" "$BASE_PATH/${ES_VERSION}-2" "$BASE_PATH/${ES_VERSION}-3")
+
+# 检查输入参数
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+  echo "使用方法: $0 <node_number> [stop|restart]"
+  echo "例如: $0 1 stop    (仅停止第一个节点)"
+  echo "例如: $0 2 restart (重启第二个节点)"
+  exit 1
+fi
+
+NODE_NUMBER=$1
+ACTION=${2:-restart} # 默认行为为重启
+
+# 验证输入参数
+if ! [[ "$NODE_NUMBER" =~ ^[1-3]$ ]]; then
+  echo "错误: 请输入有效的节点编号 (1, 2 或 3)"
+  exit 1
+fi
+
+if [[ "$ACTION" != "stop" && "$ACTION" != "restart" ]]; then
+  echo "错误: 第二个参数必须是 stop 或 restart"
+  exit 1
+fi
+
+# 获取要操作的节点路径
+NODE_INDEX=$((NODE_NUMBER - 1))
+ES_INSTANCE=${ES_INSTANCES[$NODE_INDEX]}
+
+# 停止节点
+echo "停止节点: $ES_INSTANCE"
+PROCESS_INFO=$(ps -ef | grep "${ES_VERSION}-${NODE_NUMBER}" | grep -v grep) # 获取进程信息
+if [ -n "$PROCESS_INFO" ]; then
+  echo "找到以下进程:"
+  echo "$PROCESS_INFO"
+  PID=$(echo "$PROCESS_INFO" | awk '{print $2}') # 提取 PID
+  echo "停止进程 (PID: $PID)"
+  kill -9 "$PID"
+  echo "节点已停止: $ES_INSTANCE"
+else
+  echo "未找到正在运行的进程，节点可能未启动。"
+fi
+
+# 如果操作为 "stop"，直接退出
+if [ "$ACTION" == "stop" ]; then
+  echo "操作完成：节点 $NODE_NUMBER 已停止。"
+  exit 0
+fi
+
+# 等待 5 秒
+echo "等待 5 秒后重启节点..."
+sleep 5
+
+# 启动节点
+echo "启动节点: $ES_INSTANCE"
+"${ES_INSTANCE}/bin/elasticsearch" &
+echo "节点已启动: $ES_INSTANCE"
+
+exit 0
+
 
 ```
