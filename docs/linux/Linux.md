@@ -13,6 +13,7 @@ weight: 1
 | nslookup nginx-ui.kizuki.cn | 查看域名连通情况     |
 | less a.txt                  | 查看文件内容       |
 | find / -type f -size +200M  | 查看文件大于200MB的 |
+| tcpdump -i eth0 -A -s 0 'tcp port 80' > http_requests.txt｜ 抓包|
 
 
 # 查看日志
