@@ -10,13 +10,18 @@ weight: 1
 ```shell
 sudo yum install -y yum-utils
 
+
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
 ## 2. 安装并运行Docker
 ```shell
-sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+# 如果是8
+sudo sed -i 's|https://download.docker.com|https://mirrors.aliyun.com/docker-ce|' /etc/yum.repos.d/docker-ce.repo
 ```
 ## 3. 启动
 ```sudo systemctl start docker```
@@ -37,7 +42,7 @@ https://cr.console.aliyun.com/cn-chengdu/instances/mirrors
 ## 更换镜像源
 ```shell
 # 编辑Docker配置文件: 打开或创建 
-/etc/docker/daemon.json
+sudo vi /etc/docker/daemon.json
 
 # 重启Docker服务: 为使配置生效，请执行以下命令：
 sudo systemctl daemon-reload

@@ -3,11 +3,14 @@ title: nginx-ui使用
 toc: true
 weight: 1
 ---
+https://nginxui.com/zh_CN/guide/getting-started.html
 
+# 创建目录
 /usr/local/etc/nginx-ui
 
+# 安装nodejs
+
 配置[app.ini]
-https://github.com/0xJacky/nginx-ui/blob/dev/README-zh_CN.md
 
 nginx文件的http下需要加：
 ```shell
@@ -17,7 +20,7 @@ http {
 }
 ```
 
-
+注意log和nginx处。
 ```shell
 [app]
 PageSize  = 20
@@ -68,13 +71,13 @@ CMD      = logrotate /etc/logrotate.d/nginx
 Interval = 1440
 
 [nginx]
-AccessLogPath   = /usr/local/nginx/logs/access.log
-ErrorLogPath    = /usr/local/nginx/logs/error.log
-LogDirWhiteList = /usr/local/nginx/logs
-ConfigDir       = /usr/local/nginx/
-PIDPath         = /usr/local/nginx/logs/nginx.pid
+AccessLogPath   = /var/log/nginx/access.log
+ErrorLogPath    = /var/log/nginx/error.log
+LogDirWhiteList = /var/log/nginx
+ConfigDir       = /etc/nginx/
+PIDPath         = /run/nginx.pid
 TestConfigCmd   = 
-ReloadCmd       = /usr/local/nginx/sbin/nginx -s reload
+ReloadCmd       = nginx -s reload
 RestartCmd      = 
 
 [node]
@@ -100,10 +103,15 @@ RPOrigins     =
 
 # 命令
 ```shell
+# 安装
+curl -O https://github.com/0xJacky/nginx-ui/releases/download/v2.3.2/nginx-ui-linux-64.tar.gz
 #启动
-/usr/local/bin/nginx-ui -config /usr/local/etc/nginx-ui/app.ini
+nohup /usr/local/bin/nginx-ui -config /usr/local/etc/nginx-ui/app.ini &
 
-systemctl start nginx-ui
-systemctl stop nginx-ui
-systemctl restart nginx-ui
 ```
+
+重置密码：
+/usr/local/bin/nginx-ui  reset-password --config=/usr/local/etc/nginx-ui/app.ini
+
+
+默认端口9000

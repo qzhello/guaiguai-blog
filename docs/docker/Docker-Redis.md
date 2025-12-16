@@ -5,13 +5,8 @@ weight: 3
 
 # 部署
 ```shell
-docker pull jcloudhub.jcloudcs.com/jdcloudhub/redis
-
-docker run --name redis -p 6379:6379 -d jcloudhub.jcloudcs.com/jdcloudhub/redis 
-
-docker run --name redis -p 6379:6379 -d redis
+docker run --name redis -p 6379:6379 -d redis --requirepass guaiguai 
 ```
-
 
 # 如何访问redis
 ```shell

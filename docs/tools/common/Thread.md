@@ -10,7 +10,7 @@
 public class ParseThreadCount {
     public static void main(String[] args) {
         // 定义文件路径
-        String filePath = "/Users/quzhihao/Downloads/a.txt";
+        String filePath = "/Users/kizuhiko/Downloads/a.txt";
 
         // 定义一个 Map 来存储线程名前缀和出现次数
         Map<String, Integer> threadCountMap = new HashMap<>();

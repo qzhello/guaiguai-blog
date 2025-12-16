@@ -25,6 +25,9 @@ https://www.elastic.co/guide/en/elasticsearch/reference/8.13/mapping.html
 ```bash
 docker pull elasticsearch:latest
 docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:latest
+
+docker pull elasticsearch:8.11.3
+docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:8.11.3
 ```
 
 # 新特性

@@ -23,7 +23,7 @@ https://services.gradle.org/distributions/gradle-8.7-all.zip
 
    distributionUrl：改为本地路径，记得把distributionSha256Sum也改掉。最好是所有的gradle都改。
 ```shell
-distributionUrl=file:///Users/quzhihao/Downloads/gradle-8.7-all.zip
+distributionUrl=file:///Users/kizuhiko/Downloads/gradle-8.7-all.zip
 ```
 
 # 修改build.gradle
@@ -87,7 +87,7 @@ elasticsearch.yml
 ```shell
 cluster.name: test
 node.name: node-3
-path.logs: /Users/quzhihao/logs
+path.logs: /Users/kizuhiko/logs
 http.port: 9203
 transport.port: 9303
 discovery.seed_hosts: ["127.0.0.1:9301", "127.0.0.1:9302", "127.0.0.1:9303"]
@@ -132,7 +132,7 @@ permission java.lang.RuntimePermission "loadLibrary.*";
 关闭xpack的话就可以不加。
 `xpack.security.enabled: false`
 ```shell
-./elasticsearch-users useradd quzhihao -p quzhihao -r kibana_admin,logstash_system,beats_system,apm_system,kibana_system,beats_admin,ingest_admin,logstash_admin,rollup_admin,superuser,machine_learning_admin,watcher_admin
+./elasticsearch-users useradd kizuhiko -p kizuhiko -r kibana_admin,logstash_system,beats_system,apm_system,kibana_system,beats_admin,ingest_admin,logstash_admin,rollup_admin,superuser,machine_learning_admin,watcher_admin
 ```
 
 ## kibana.yml
@@ -155,7 +155,7 @@ curl -X POST "http://localhost:9201/_license/start_basic"
 ```shell
 docker run -d -p 15601:5601  \
   --name kibana813  -e TZ='CST-8' \
-  --volume "/Users/quzhihao/docker/kibana/kibana813.yml:/usr/share/kibana/config/kibana.yml" \
+  --volume "/Users/kizuhiko/docker/kibana/kibana813.yml:/usr/share/kibana/config/kibana.yml" \
   kibana:8.13.4
   
 ```
@@ -173,13 +173,13 @@ jvm.options
 ```shell#!/bin/bash
 
 # 定义基础路径
-BASE_PATH="/Users/quzhihao/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
+BASE_PATH="/Users/kizuhiko/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
 ES_VERSION="elasticsearch-8.13.4-SNAPSHOT"
 ES_INSTANCES=("$BASE_PATH/${ES_VERSION}-1" "$BASE_PATH/${ES_VERSION}-2" "$BASE_PATH/${ES_VERSION}-3")
 ES_INSTANCES_DEBUG_PORT=("5007" "5008" "5009") # 定义调试端口
 
 # 定义配置文件路径
-CONFIG_FILES=("/Users/quzhihao/Downloads/es1.yml" "/Users/quzhihao/Downloads/es2.yml" "/Users/quzhihao/Downloads/es3.yml")
+CONFIG_FILES=("/Users/kizuhiko/Downloads/es1.yml" "/Users/kizuhiko/Downloads/es2.yml" "/Users/kizuhiko/Downloads/es3.yml")
 
 # JVM 堆内存设置 (4GB)
 HEAP_SIZE="4g"
@@ -312,7 +312,7 @@ chmod +x manage_node.sh
 #!/bin/bash
 
 # 定义基础路径
-BASE_PATH="/Users/quzhihao/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
+BASE_PATH="/Users/kizuhiko/IdeaProjects/elasticsearch/distribution/archives/darwin-aarch64-tar/build/install"
 ES_VERSION="elasticsearch-8.13.4-SNAPSHOT"
 ES_INSTANCES=("$BASE_PATH/${ES_VERSION}-1" "$BASE_PATH/${ES_VERSION}-2" "$BASE_PATH/${ES_VERSION}-3")
 

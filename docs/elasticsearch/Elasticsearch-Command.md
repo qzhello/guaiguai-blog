@@ -53,6 +53,10 @@ PUT /<index_name>/_mapping
 GET /<index_name>/_mapping/field/<field_name>
 ```
 
+### 获取索引的cache
+```shell
+GET /<index_name>/_stats/request_cache,query_cache
+```
 
 ## 索引设置（Settings）
 ### 查看索引的设置
